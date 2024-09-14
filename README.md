@@ -2,6 +2,7 @@
 
 ## Endpoints
 
+
 ### 1. Create a New Task
 - **URL:** `/add-task`
 - **Method:** `POST`
@@ -11,6 +12,7 @@
   - `status`: string (`Pending`, `In Progress`, `Done`)
 - **Response:** 
   - `{ message: "Task created successfully", taskId: <id> }`
+    
 
 ### 2. Get All Tasks
 - **URL:** `/tasks`
@@ -21,12 +23,14 @@
   - `order`: string (`asc`, `desc`)
 - **Response:** 
   - `[ { id, title, description, status, created_at } ]`
+    
 
 ### 3. Get Task by ID
 - **URL:** `/task/:id`
 - **Method:** `GET`
 - **Response:** 
   - `{ id, title, description, status, created_at }`
+  
 
 ### 4. Update a Task
 - **URL:** `/task/:id`
@@ -38,11 +42,13 @@
 - **Response:** 
   - `{ message: "Task updated successfully" }`
 
+
 ### 5. Delete a Task
 - **URL:** `/task/:id/delete`
 - **Method:** `POST`
 - **Response:** 
   - `{ message: "Task deleted successfully" }`
+
 
 ### 6. Update Task Status
 - **URL:** `/task/:id/update-status`
