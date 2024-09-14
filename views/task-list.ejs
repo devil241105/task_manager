@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task List</title>
+  <link rel="stylesheet" href="/main.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="main">
+  <h1>Task Titles</h1>
+  <p>Total Tasks: <%= total %></p>
+
+  
+  <form method="GET" action="/">
+    <label for="sort-by">Sort by:</label>
+    <select id="sort-by" name="sort_by" onchange="this.form.submit()">
+      <option value="created_at" <%= sortBy === 'created_at' ? 'selected' : '' %>>Created Date</option>
+      <option value="due_date" <%= sortBy === 'due_date' ? 'selected' : '' %>>Due Date</option>
+    </select>
+    <br>
+
+    <label for="status-filter">Filter by Status:</label>
+    <select id="status-filter" name="status" onchange="this.form.submit()">
+      <option value="">All</option>
+      <option value="Pending" <%= status === 'Pending' ? 'selected' : '' %>>Pending</option>
+      <option value="In Progress" <%= status === 'In Progress' ? 'selected' : '' %>>In Progress</option>
+      <option value="Done" <%= status === 'Done' ? 'selected' : '' %>>Done</option>
+    </select>
+  </form>
+
+  <% if (tasks.length > 0) { %>
+    <ul>
+      <% tasks.forEach(function(task) { %>
+        <li>
+          <a id="link" href="/<%= task.task_id %>">
+            <%= task.title %> (<%= task.status %>)
+          </a>
+        </li>
+      <% }); %>
+    </ul>
+  <% } else { %>
+    <p>No tasks available</p>
+  <% } %>
+
+
+  <br>
+  <a href="/add-task">add task +</a>
+</div>
+
+</body>
+</html>
