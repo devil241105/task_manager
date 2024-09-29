@@ -28,7 +28,7 @@ app.get("/add-task", (req, res) => {
 
 app.post("/add-task", async (req, res) => {
     const { title, description, status, due_date } = req.body;
-
+    console.log("h")
     try {
         await db.query(
             "INSERT INTO tasks (title, description, status, due_date) VALUES ($1, $2, $3, $4)",
@@ -42,6 +42,7 @@ app.post("/add-task", async (req, res) => {
 });
 
 app.post("/update-status/:id", async (req, res) => {
+    console.log(req);
     const taskId = req.params.id;
     const { status } = req.body;
 
@@ -55,6 +56,7 @@ app.post("/update-status/:id", async (req, res) => {
 });
 
 app.post("/delete-task/:id", async (req, res) => {
+    console.log(req);
     const taskId = req.params.id;
 
     try {
@@ -67,6 +69,7 @@ app.post("/delete-task/:id", async (req, res) => {
 });
 
 app.get("/:id", async (req, res) => {
+    console.log(req);
     const taskId = req.params.id;
     try {
         const result = await db.query("SELECT * FROM tasks WHERE task_id = $1", [taskId]);
@@ -84,6 +87,7 @@ app.get("/:id", async (req, res) => {
 });
 
 app.get("/", async (req, res) => {
+    console.log(req);
     const sortBy = req.query.sort_by || "created_at";
     const statusFilter = req.query.status || "";
     console.log(req.query);
@@ -101,7 +105,6 @@ app.get("/", async (req, res) => {
 
         const result = await db.query(query, queryParams);
         const tasks = result.rows;
-
         res.render("task-list.ejs", {
             tasks: tasks,
             total: tasks.length,
